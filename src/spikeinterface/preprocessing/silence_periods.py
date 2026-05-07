@@ -66,6 +66,8 @@ class SilencedPeriodsRecording(BasePreprocessor):
             periods = _all_period_list_to_periods_vec(list_periods, num_seg)
         else:
             assert list_periods is None
+            if isinstance(periods, list):
+                periods = np.asarray([tuple(p) for p in periods], dtype=base_period_dtype)
             if not isinstance(periods, np.ndarray):
                 raise ValueError(f"periods must be a np.array with dtype {base_period_dtype}")
 
